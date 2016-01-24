@@ -1,6 +1,11 @@
 我們原本想利用spark的MLlib來跑kaggle的titanic
+
 但是嘗試了很久，一直有問題在
+
 所以我們最後決定改善data visulization的效能
+
 由於資料量過大，讀取firebase資料可能造成時間延遲的問題
+
 我們把資料先存在本地端，以增加讀取的速度
+
 想辦法改善loading過久的問題
