@@ -15,7 +15,7 @@ https://spark.apache.org/docs/1.2.0/mllib-ensembles.html
 不過在本地端用twstat-template測試的時候一直有點問題
 
 所以最後的版本就沒有使用
-
+<pre>
 $(function(){
   $.getJSON('datas.json',function(data){
       $.each( data, function( key, val ) {
@@ -25,3 +25,4 @@ $(function(){
       console.log('error');
     });
 });
+</pre>
