@@ -3,12 +3,14 @@
 <head>
   {{> head}}
     <!-- my js & css -->
-	<link rel="stylesheet" href="http://140.116.245.252/data-visualization-proj/Team2/amcharts/style.css" type="text/css">
+	<link rel="stylesheet" href="./amcharts/style.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	
-	<style type="text/css">#chartwrapper{width:100%;padding:20px;border:1px solid #eee;background:-moz-box-sizing: border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}#loading-data{width:100%;height:50px;font-size:25px;text-align:center;margin-top:-25px;top:50%;position:absolute;}</style>
-	<script src="http://140.116.245.252/data-visualization-proj/Team2/amcharts/amcharts.js" type="text/javascript"></script>
-	<script src="http://140.116.245.252/data-visualization-proj/Team2/amcharts/serial.js" type="text/javascript"></script>
-	<script src="http://140.116.245.252/data-visualization-proj/Team2/amcharts/amstock.js" type="text/javascript"></script>
+	
+	
+	<script src="http://140.116.103.205/amcharts/amcharts.js" type="text/javascript"></script>
+	<script src="http://140.116.103.205/amcharts/serial.js" type="text/javascript"></script>
+	<script src="http://140.116.103.205/amcharts/amstock.js" type="text/javascript"></script>
 	<script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
 	<script>
 			AmCharts.ready(function () {
@@ -224,6 +226,171 @@
 				dataSetSelector.position = "left";
 				chart.dataSetSelector = dataSetSelector;
 				
+				/*
+				$(function(){
+					$.getJSON('datas.json',function(data){
+					
+						// set stock events
+						predict92 = 0;
+						predict95 = 0;
+						predict98 = 0;
+						predictultra = 0;
+						
+						dataSet1.stockEvents = [] ;
+						dataSet2.stockEvents = [] ;
+						dataSet3.stockEvents = [] ;
+						dataSet4.stockEvents = [] ;
+						dataSet5.stockEvents = [] ;
+						dataSet6.stockEvents = [] ;
+						dataSet7.stockEvents = [] ;
+						$.each( data, function( key, val ) {
+							if(val.type==1){
+								chartData5.push({
+									date: new Date(val.date),
+									value: val.WTI,
+									volume: val.WTI
+								});
+								chartData6.push({
+									date: new Date(val.date),
+									value: val.Brent,
+									volume: val.Brent
+								});
+								chartData7.push({
+									date: new Date(val.date),
+									value: val.Dubai,
+									volume: val.Dubai
+								});
+							}else if(val.type==0){
+								chartData1.push({
+									date: new Date(val.date),
+									value: val.ninetwo,
+									volume: val.ninetwo
+								});
+								chartData2.push({
+									date: new Date(val.date),
+									value: val.ninefive,
+									volume: val.ninefive
+								});
+								chartData3.push({
+									date: new Date(val.date),
+									value: val.nineeight,
+									volume: val.nineeight
+								});
+								chartData4.push({
+									date: new Date(val.date),
+									value: val.ultra,
+									volume: val.ultra
+								});
+							}else if(val.type==2){
+								if(val.domestic==1){//domestic
+									dataSet1.stockEvents.push({
+										date: new Date(val.date),
+										type: "sign",
+										backgroundColor: "#85CDE6",
+										graph: graph1,
+										text: "X",
+										description: val.event,
+										url: val.url,
+										urlTarget: "_blank"
+									});
+									dataSet2.stockEvents.push({
+										date: new Date(val.date),
+										type: "sign",
+										backgroundColor: "#85CDE6",
+										graph: graph1,
+										text: "X",
+										description: val.event,
+										url: val.url,
+										urlTarget: "_blank"
+									});
+									dataSet3.stockEvents.push({
+										date: new Date(val.date),
+										type: "sign",
+										backgroundColor: "#85CDE6",
+										graph: graph1,
+										text: "X",
+										description: val.event,
+										url: val.url,
+										urlTarget: "_blank"
+									});
+									dataSet4.stockEvents.push({
+										date: new Date(val.date),
+										type: "sign",
+										backgroundColor: "#85CDE6",
+										graph: graph1,
+										text: "X",
+										description: val.event,
+										url: val.url,
+										urlTarget: "_blank"
+									});
+								}else {
+									dataSet5.stockEvents.push({
+										date: new Date(val.date),
+										type: "sign",
+										backgroundColor: "#85CDE6",
+										graph: graph1,
+										text: "X",
+										description: val.event,
+										url: val.url,
+										urlTarget: "_blank"
+									});
+									dataSet6.stockEvents.push({
+										date: new Date(val.date),
+										type: "sign",
+										backgroundColor: "#85CDE6",
+										graph: graph1,
+										text: "X",
+										description: val.event,
+										url: val.url,
+										urlTarget: "_blank"
+									});
+									dataSet7.stockEvents.push({
+										date: new Date(val.date),
+										type: "sign",
+										backgroundColor: "#85CDE6",
+										graph: graph1,
+										text: "X",
+										description: val.event,
+										url: val.url,
+										urlTarget: "_blank"
+									});
+								}
+							}else if(val.type==3){//predict
+								predict92 = val.ninetwo;
+								predict95 = val.ninefive;
+								predict98 = val.nineeight;
+								predictultra = val.ultra;
+							}
+						});
+						
+						chartData1.sort(compare);
+						chartData2.sort(compare);
+						chartData3.sort(compare);
+						chartData4.sort(compare);
+						chartData5.sort(compare);
+						chartData6.sort(compare);
+						chartData7.sort(compare);
+					
+						chart.write('chartdiv');
+						document.getElementById('pre92').innerHTML += predict92 + Rise_Fall(FloatSubtraction(predict92 , chartData1[chartData1.length-1].value));
+						document.getElementById('pre95').innerHTML += predict95 + Rise_Fall(FloatSubtraction(predict95 , chartData2[chartData2.length-1].value));
+						document.getElementById('pre98').innerHTML += predict98 + Rise_Fall(FloatSubtraction(predict98 , chartData3[chartData3.length-1].value));
+						document.getElementById('preultra').innerHTML += predictultra + Rise_Fall(FloatSubtraction(predictultra , chartData4[chartData4.length-1].value));
+	 					
+					
+					
+						document.getElementById('now92').innerHTML += chartData1[chartData1.length-1].value ;
+						document.getElementById('now95').innerHTML += chartData2[chartData2.length-1].value ;
+						document.getElementById('now98').innerHTML += chartData3[chartData3.length-1].value ;
+						document.getElementById('nowultra').innerHTML += chartData4[chartData4.length-1].value ;		
+						
+					}).error(function(){
+						console.log('error');
+					});
+				});
+				
+				*/
+				
 				
 				ref.once("value", function(snapshot) {	//get data from firebase and generate chartDatas
 					newPost = snapshot.val();
@@ -363,24 +530,7 @@
 					chartData5.sort(compare);
 					chartData6.sort(compare);
 					chartData7.sort(compare);
-					/*
-					dataSet1.stockEvents.push({
-						date: new Date("2015-10-12"),
-						type: "sign",
-						backgroundColor: "#85CDE6",
-						graph: graph1,
-						text: "S",
-						description: "This is description of an event"
-					});
-					dataSet1.stockEvents.push({
-						date: new Date("2015-10-19"),
-						type: "sign",
-						backgroundColor: "#85CDE6",
-						graph: graph1,
-						text: "S",
-						description: "This is description of an event"
-					});
-					*/
+					
 					temp = $.map(data[data.length-1], function(value, index) {
 						return [value];
 					});
@@ -403,6 +553,7 @@
 					document.getElementById('now98').innerHTML += chartData3[chartData3.length-1].value ;
 					document.getElementById('nowultra').innerHTML += chartData4[chartData4.length-1].value ;
 				});
+				
 			}
 			function FloatSubtraction(arg1, arg2)
                     {
